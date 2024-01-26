@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Splines
-nav_order: 5
+title: Improvements
+nav_order: 6
 ---
 
-# Splines
+# Improvements
 
 {: .warning}
 This section is still work in progress.
