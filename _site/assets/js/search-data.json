@@ -1,64 +1,197 @@
 {"0": {
-    "doc": "About Easings",
-    "title": "About Easings",
-    "content": "The concept of easing was first introduced in the 1930s by Disney animators, who were looking for ways to make their animated characters move more fluidly. However, it wasn’t until the rise of computer graphics in the 1980s that easings became a common technique in animation software. Easing techniques are used in a wide variety of applications, and have a significant impact on the gameplay experience in video games, especially in games that require precision control and quick reflexes. One of the most common applications of easing in video games is to create smooth movement animations for characters, objects and the camera. For example, when a character jumps, easing can be used to make the jump animation appear more natural by gradually accelerating the character’s movement upward and then gradually slowing down their descent. It can also be used to create more responsive controls and to smooth camera transitions between different game areas or angles. ",
-    "url": "/Easings_and_Splines_Research/docs/2_about_easings/",
-    
-    "relUrl": "/docs/2_about_easings/"
-  },"1": {
-    "doc": "Classification",
-    "title": "Clasification",
-    "content": "Easing functions can be classified into several categories based on their behavior and the way they interpolate values over time. I have classified the ones used in this project into the following: . | Sine: Curved path, similar to the shape of a sine wave, gradual acceleration and deceleration. They are often used for animations that require a fluid and organic movement, such as the movement of waves or the motion of a pendulum. | Quadratic: Accelerate or decelerate the motion at a constant rate. They can be used to create a sense of momentum or inertia in an animation. | Cubic: Accelerate or decelerate the motion more aggressively than quadratic easing functions. They can be used to create a more pronounced sense of momentum or to simulate natural movements like bouncing. | Quartic: More aggressive than Cubic. | Quintic: More aggressive than Quartic. | Exponential: Accelerate or decelerate the motion exponentially. They can be used to create an exaggerated sense of momentum or to simulate movements like a rocket taking off. | Circular: Create a motion that follows a circular path, gradual acceleration and deceleration. Circular easing functions are often used for animations that involve rotation or circular movement. | Back: Create a motion that overshoots its target and then returns to it. | Elastic: Simulate a spring-like motion where the animation overshoots its target and then bounces back. They can be used to create a playful or whimsical effect in animations. | Bounce: Simulate a bouncing ball by adding a series of small, quick bounces. | . Each category includes three types of functions: . | Ease In: Starts the animation slowly and gradually accelerates towards the end. | Ease Out: Starts the animation at full speed and gradually slows down towards the end. | Ease InOut: Starts the animation slowly, accelerates towards the middle, and then gradually slows down towards the end. | . ",
-    "url": "/Easings_and_Splines_Research/docs/3_classification/#clasification",
-    
-    "relUrl": "/docs/3_classification/#clasification"
-  },"2": {
-    "doc": "Classification",
-    "title": "Classification",
+    "doc": "About TheOne",
+    "title": "1. What is TheOne",
     "content": " ",
-    "url": "/Easings_and_Splines_Research/docs/3_classification/",
+    "url": "/TheOneEngine_wp/docs/2_TheOne/#1-what-is-theone",
     
-    "relUrl": "/docs/3_classification/"
+    "relUrl": "/docs/2_TheOne/#1-what-is-theone"
+  },"1": {
+    "doc": "About TheOne",
+    "title": "1.1. Description",
+    "content": "TheOne is a game engine crafted with passion by Héctor Báscones, Arnau Jiménez and Júlia Serra. TheOne pillars are: . | Documentation | Simplicity | SOLID | . ",
+    "url": "/TheOneEngine_wp/docs/2_TheOne/#11-description",
+    
+    "relUrl": "/docs/2_TheOne/#11-description"
+  },"2": {
+    "doc": "About TheOne",
+    "title": "1.2. Modules",
+    "content": ". | TheOneEngine: Uses EngineCore, asset dependent, for any game built with TheOne | TheOneEditor: Uses EngineCore, expose game development to the end-user | . ",
+    "url": "/TheOneEngine_wp/docs/2_TheOne/#12-modules",
+    
+    "relUrl": "/docs/2_TheOne/#12-modules"
   },"3": {
-    "doc": "The Easing Class",
-    "title": "The Easing Class",
-    "content": "For this project I’ve included 30 easing functions for you to mess around with. All of them accept ‘t’ as a parameter and returns a double value. The class also includes ‘EasingAnimation(int start, int end, double time, EasingType easingType)’ . | start: initial position of the object. | end: final position. | time: value 0 - 1. | easingType: the type of easing to use. | . ‘EasingAnimation()’ uses the function specified by ‘easingType’ to calculate the interpolated position at the time given by ‘t’. double Easing::EasingAnimation(int start, int end, double time, EasingType easingType) { // Lambda function: // [capture list](parameters) -&gt; return type {function body} // Captures current object and easingType by value, // making them accessible within the function's scope. auto easing = [this, easingType](double t) -&gt; double { switch (easingType) { case EasingType::EASE_IN_SIN: return EaseInSin(t); case EasingType::EASE_OUT_SIN: return EaseOutSin(t); case EasingType::EASE_INOUT_SIN: return EaseInOutSin(t); // All other Easing Types... } }; double t = easing(time); return start + (end - start) * t; } . All the parameters requiered by the function seem pretty straightforward asides from ‘t’. How do we know what value we need to pass to the function? . We’ll need to keep track of the following: . | Time passed since the start of the animation. | Total duration of the animation. | Status of the animation (has it finished?). | . And for this purpose, I’ve added this variables into the Easings Class: . double elapsedTime = 0; double totalTime = 0; bool bFinished = true; . Next, ‘TrackTime(double dt)’ will be used to calculate the time passed since the beginning of the animation and returning a value from 0-1, it does so by adding ‘dt’ to ‘elapsedTime’ and dividing by ‘totalTime’. It also checks if the animation has finished. double Easing::TrackTime(double dt) { if (elapsedTime &lt; totalTime) { elapsedTime += (dt / 1000); return elapsedTime / totalTime; } else { bFinished = true; elapsedTime = 0; return 1; } } . ‘dt’ needs to be divided by 1000 since totalTime is expressed in seconds. Example . The code below ilustrates how to implement an animation into a rectangle. double t = easingPause-&gt;TrackTime(dt); double easedY = easing-&gt;EasingAnimation(a, b, t, easing); SDL_Rect rectangle = { x, easedY, w, h }; app-&gt;render-&gt;DrawRectangle(rectangle, r, g, b, a, false); . ",
-    "url": "/Easings_and_Splines_Research/docs/4_the_easing_class/",
+    "doc": "About TheOne",
+    "title": "2. History of TheOne",
+    "content": " ",
+    "url": "/TheOneEngine_wp/docs/2_TheOne/#2-history-of-theone",
     
-    "relUrl": "/docs/4_the_easing_class/"
+    "relUrl": "/docs/2_TheOne/#2-history-of-theone"
   },"4": {
-    "doc": "Splines",
-    "title": "Splines",
-    "content": "This section is still work in progress. ",
-    "url": "/Easings_and_Splines_Research/docs/5_splines/",
+    "doc": "About TheOne",
+    "title": "2.1. Context",
+    "content": "TheOne is a project for the subject of Game Engines in our 3rd year at CITM (UPC). Our team (Héctor Báscones, Arnau Jiménez, Júlia Serra) had 3 months to create a game engine from scratch. ",
+    "url": "/TheOneEngine_wp/docs/2_TheOne/#21-context",
     
-    "relUrl": "/docs/5_splines/"
+    "relUrl": "/docs/2_TheOne/#21-context"
   },"5": {
+    "doc": "About TheOne",
+    "title": "2.2. Goals",
+    "content": "Our goals for this project were: . | Understanding the architecture of a game engine | Making a game engine as simple as possible | Producing SOLID modern code | Creating a game with our engine | Dealing with a long-term project | Developping documentation for developers and end-users | . ",
+    "url": "/TheOneEngine_wp/docs/2_TheOne/#22-goals",
+    
+    "relUrl": "/docs/2_TheOne/#22-goals"
+  },"6": {
+    "doc": "About TheOne",
+    "title": "2.3. Pre-production",
+    "content": "We spent the first weeks designing our initial architecture, setting up the template with the libraries, and defining the rules to keep a maintainable code during the whole project. ",
+    "url": "/TheOneEngine_wp/docs/2_TheOne/#23-pre-production",
+    
+    "relUrl": "/docs/2_TheOne/#23-pre-production"
+  },"7": {
+    "doc": "About TheOne",
+    "title": "2.4. Production",
+    "content": "The production made us realize that our idea of a game engine was naive. Our architecture evolved through the knowledge acquired in class. ",
+    "url": "/TheOneEngine_wp/docs/2_TheOne/#24-production",
+    
+    "relUrl": "/docs/2_TheOne/#24-production"
+  },"8": {
+    "doc": "About TheOne",
+    "title": "About TheOne",
+    "content": " ",
+    "url": "/TheOneEngine_wp/docs/2_TheOne/",
+    
+    "relUrl": "/docs/2_TheOne/"
+  },"9": {
+    "doc": "Features",
+    "title": "3. Features",
+    "content": " ",
+    "url": "/TheOneEngine_wp/docs/3_Features/#3-features",
+    
+    "relUrl": "/docs/3_Features/#3-features"
+  },"10": {
+    "doc": "Features",
+    "title": "3.1. Implemented",
+    "content": "Here is a non-exhaustive list of TheOne main features: . | Model Import + Drag &amp; Drop | Texture Import | GameObject hierarchy + Component Pattern | Unity-like camera controls | Editor tools (main menu and windows) | Transform and Game Object hierarchy | Custom file format | Scene serialization | Play / Stop | Mouse picking | Frustum culling | Resource Management | . ",
+    "url": "/TheOneEngine_wp/docs/3_Features/#31-implemented",
+    
+    "relUrl": "/docs/3_Features/#31-implemented"
+  },"11": {
+    "doc": "Features",
+    "title": "3.2. To implement",
+    "content": "Again, a non-exhaustive list of TheOne in-coming features: . | Custom shaders support | Rigidbody physics | Windows game building | More input device support (Gamepad) | Prefab system | Skeletal animation | Sound system | Particle System | . ",
+    "url": "/TheOneEngine_wp/docs/3_Features/#32-to-implement",
+    
+    "relUrl": "/docs/3_Features/#32-to-implement"
+  },"12": {
+    "doc": "Features",
+    "title": "Features",
+    "content": ". ",
+    "url": "/TheOneEngine_wp/docs/3_Features/",
+    
+    "relUrl": "/docs/3_Features/"
+  },"13": {
+    "doc": "Details",
+    "title": "4. Details",
+    "content": " ",
+    "url": "/TheOneEngine_wp/docs/4_Details/#4-details",
+    
+    "relUrl": "/docs/4_Details/#4-details"
+  },"14": {
+    "doc": "Details",
+    "title": "4.1. Software",
+    "content": ". | Visual Studio 2022 (v142) (previous versions should also be supported) | . ",
+    "url": "/TheOneEngine_wp/docs/4_Details/#41-software",
+    
+    "relUrl": "/docs/4_Details/#41-software"
+  },"15": {
+    "doc": "Details",
+    "title": "4.2. Dependencies",
+    "content": ". | OpenGL + GLEW + GLM (Graphics API) | SDL2 (OpenGL Binding + Input) | Assimp (3D model loader) | DeVil (Image library) | rapidjson (JSON parser/generator) | imGui (GUI) | imPlot (2D plotting for ImGui) | . ",
+    "url": "/TheOneEngine_wp/docs/4_Details/#42-dependencies",
+    
+    "relUrl": "/docs/4_Details/#42-dependencies"
+  },"16": {
+    "doc": "Details",
+    "title": "4.3. Requirements",
+    "content": "TheOne requires: . | RAM: 256MB | OS: Windows 7 | GPU: Graphics card supporting OpenGL 3 | CPU: x64 | . ",
+    "url": "/TheOneEngine_wp/docs/4_Details/#43-requirements",
+    
+    "relUrl": "/docs/4_Details/#43-requirements"
+  },"17": {
+    "doc": "Details",
+    "title": "4.4. Licence",
+    "content": "TheOne is licenced under an MIT licence. ",
+    "url": "/TheOneEngine_wp/docs/4_Details/#44-licence",
+    
+    "relUrl": "/docs/4_Details/#44-licence"
+  },"18": {
+    "doc": "Details",
+    "title": "4.5. More information",
+    "content": "If you are interested in TheOne, you can download our engine on our website: . Learn about TheOne by visiting our Wiki: . You can also watch our features reel (TheOne v0.x) on YouTube: . ",
+    "url": "/TheOneEngine_wp/docs/4_Details/#45-more-information",
+    
+    "relUrl": "/docs/4_Details/#45-more-information"
+  },"19": {
+    "doc": "Details",
+    "title": "Details",
+    "content": " ",
+    "url": "/TheOneEngine_wp/docs/4_Details/",
+    
+    "relUrl": "/docs/4_Details/"
+  },"20": {
+    "doc": "Resources",
+    "title": "5. Getting started",
+    "content": "Learn how to create your own games using TheOne by visiting our wiki. ",
+    "url": "/TheOneEngine_wp/docs/5_Resources/#5-getting-started",
+    
+    "relUrl": "/docs/5_Resources/#5-getting-started"
+  },"21": {
+    "doc": "Resources",
+    "title": "6. Contributing",
+    "content": "TheOne is opened to any contribution. Do not hesitate to open issues (Features or bugs) or create pull requests. If you want to help us, visit our CONTRIBUTING.md guidelines document. ",
+    "url": "/TheOneEngine_wp/docs/5_Resources/#6-contributing",
+    
+    "relUrl": "/docs/5_Resources/#6-contributing"
+  },"22": {
+    "doc": "Resources",
+    "title": "7. Screenshots",
+    "content": " ",
+    "url": "/TheOneEngine_wp/docs/5_Resources/#7-screenshots",
+    
+    "relUrl": "/docs/5_Resources/#7-screenshots"
+  },"23": {
+    "doc": "Resources",
+    "title": "Resources",
+    "content": " ",
+    "url": "/TheOneEngine_wp/docs/5_Resources/",
+    
+    "relUrl": "/docs/5_Resources/"
+  },"24": {
     "doc": "Improvements",
     "title": "Improvements",
-    "content": "I found the topic of Splines so interesting that I ended up inmersing myself in an exhaustive research. Having deviated from the main topic, I run out of time and wasn’t able to implement everything I had planed. Here are some of them: . | Saving/loading spline points with .xml after editing the spline. | Velocity along the spline must be constant. | Add moving NPC to SceneSplines | . ",
-    "url": "/Easings_and_Splines_Research/docs/7_improvements/",
+    "content": "This section is still work in progress. ",
+    "url": "/TheOneEngine_wp/docs/6_Improvements/",
     
-    "relUrl": "/docs/7_improvements/"
-  },"6": {
+    "relUrl": "/docs/6_Improvements/"
+  },"25": {
     "doc": "Bibliography",
     "title": "Bibliography",
-    "content": "There is an amazing source of information to learn from on this topic, I have linked the ones that helped me the most on this research: . | The Continuity of Splines | An In-Depth look at Lerp, Smoothstep, and Shaping Functions | The Lone Coder | Easing functions | . Thanks to the following for the visuals provided: . | Principles of Animation | Ease in out | Easings I | Easings II | . ",
-    "url": "/Easings_and_Splines_Research/docs/8_bibliography/",
+    "content": "This section is still work in progress. ",
+    "url": "/TheOneEngine_wp/docs/7_Bibliography/",
     
-    "relUrl": "/docs/8_bibliography/"
-  },"7": {
-    "doc": "Home",
-    "title": "Easings and Splines Research",
-    "content": "This project is a collection of C++ functions for creating and manipulating easings and splines. It includes 30 easing functions that can be used to animate user interfaces or create smooth animations. This website is a documentation on my research. Check the github repo here. Welcome! . I’m a bachelor’s student in Video Game Design and Development at the CITM, UPC. Through my work, I’ve discovered the applications of Easings and Splines in videogames, and how using these can help create smooth animations and transitions, enhancing the user experience and making digital graphics more engaging. On this website, I’ll be sharing my findings on the topic, explaining the C++ libraries I’ve developed. These libraries are designed to be efficient and easy to use, even for beginners. In addition, I have also provided educational resources, including code examples and tutorials, to help others learn to implement them in their own projects. I believe in open collaboration and welcome feedback and contributions from others interested in this field. If you have any questions, comments, or ideas, please don’t hesitate to reach out to me. Thank you for reading, and I hope you find my work informative and helpful. License . The code is distributed by a MIT license. ",
-    "url": "/Easings_and_Splines_Research/#easings-and-splines-research",
+    "relUrl": "/docs/7_Bibliography/"
+  },"26": {
+    "doc": "Welcome!",
+    "title": "Welcome to TheOneEngine!",
+    "content": "Brief introduction. Note Example. Releases | Screenshots | Features | Wiki | Contributing . ",
+    "url": "/TheOneEngine_wp/#welcome-to-theoneengine",
     
-    "relUrl": "/#easings-and-splines-research"
-  },"8": {
-    "doc": "Home",
-    "title": "Home",
+    "relUrl": "/#welcome-to-theoneengine"
+  },"27": {
+    "doc": "Welcome!",
+    "title": "Welcome!",
     "content": " ",
-    "url": "/Easings_and_Splines_Research/",
+    "url": "/TheOneEngine_wp/",
     
     "relUrl": "/"
   }
